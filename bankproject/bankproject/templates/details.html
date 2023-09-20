@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        label[for="gender"] {
+            font-weight: normal;
+        }
+
+        select {
+            height: 35px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        input[type="submit"],
+        input[type="button"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover,
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bank Account Application</h1>
+    
+        <form action="#" method="POST" onsubmit="return showSuccessMessage()">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        
+        <label for="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label>
+        
+        <label for="phno">Phone Number:</label>
+        <input type="tel" id="phno" name="phno" required>
+        
+        <label for="mailid">Username:</label>
+        <input type="email" id="mailid" name="mailid" required>
+        
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea>
+        
+        <!-- <label for="district">District:</label>
+        <select id="district" name="district" required>
+            <option value="alua">Alua</option>
+            <option value="edappally">Edappally</option>
+        </select> -->
+
+        <label for="country">Select District:</label>
+        <select id="country" name="country" onchange="populateCities()" required>
+            <option value="">Select a Country</option>
+            <option value="Ernakulam">Ernakulam</option>
+            <option value="Kottayam">Kottayam</option>
+            <option value="Alappuzha">Alappuzha</option>
+        </select>
+        
+        <label for="city">Select City:</label>
+        <select id="city" name="city" required>
+            <option value="">Select a City</option>
+        </select>
+        
+        <label for="account-type">Account Type:</label>
+        <select id="account-type" name="account-type" required>
+            <option value="savings">Savings Account</option>
+            <option value="current">Current Account</option>
+        </select>
+        
+        <label>Materials Provided:</label><br>
+        <input type="checkbox" id="debit-card" name="materials[]" value="debit-card">
+        <label for="debit-card">Debit Card</label>
+        
+        <input type="checkbox" id="credit-card" name="materials[]" value="credit-card">
+        <label for="credit-card">Credit Card</label>
+        
+        <input type="checkbox" id="cheque-book" name="materials[]" value="cheque-book">
+        <label for="cheque-book">Cheque Book</label>
+        <div style="text-align: center;">
+            <input type="submit" value="Submit" id="submitButton">
+            <input type="button" value="Logout" onclick="logout()">
+        </div>
+    </form>
+       
+        <script>
+            function showSuccessMessage() {
+                document.getElementById("submitButton").style.display = "none";
+    
+                var successMessage = document.createElement("p");
+                successMessage.textContent = "Application Accepted";
+    
+                var homepageLink = document.createElement("a");
+                homepageLink.textContent = "Return to Homepage";
+                homepageLink.href = "{% url 'demo' %}";
+    
+                var form = document.querySelector("form");
+                form.appendChild(successMessage);
+                form.appendChild(homepageLink);
+    
+                return false;
+            }
+    
+            function logout() {
+                alert("Logged out successfully.");
+            }
+
+
+        // // Get references to the "District" and "Branch" dropdowns
+        // var districtDropdown = document.getElementById("district");
+        // var branchDropdown = document.getElementById("branch");
+
+        // // Define an object that maps districts to their respective branches
+        // var branchOptions = {
+        //     "alua": ["Branch1", "Branch2", "Branch3"],
+        //     "edappally": ["Branch4", "Branch5", "Branch6"],
+        //     // Add more districts and branches as needed
+        // };
+
+        // // Function to populate the "Branch" dropdown based on the selected district
+        // function populateBranchDropdown() {
+        //     // Get the selected district
+        //     var selectedDistrict = districtDropdown.value;
+
+        //     // Clear existing options in the "Branch" dropdown
+        //     branchDropdown.innerHTML = "";
+
+        //     // Add default option (prompting user to select)
+        //     var defaultOption = document.createElement("option");
+        //     defaultOption.text = "Select a branch";
+        //     branchDropdown.add(defaultOption);
+
+        //     // Populate the "Branch" dropdown with options based on the selected district
+        //     if (branchOptions[selectedDistrict]) {
+        //         branchOptions[selectedDistrict].forEach(function (branch) {
+        //             var option = document.createElement("option");
+        //             option.text = branch;
+        //             branchDropdown.add(option);
+        //         });
+        //     }
+        // }
+
+        // // Call populateBranchDropdown initially to populate the "Branch" dropdown when the page loads
+        // populateBranchDropdown();
+
+        // // Add an event listener to the "District" dropdown to update the "Branch" dropdown when the district changes
+        // districtDropdown.addEventListener("change", populateBranchDropdown);
+
+        var cityOptions = {
+            Ernakulam: ["Alua", "Edapally", "Kochi"],
+            Kottyam: ["Ettumanoor", "Kidangoor", "Vaikom"],
+            Alappuzha: ["Kayamkulam", "Cherthala", "punnapra"]
+        };
+        
+        function populateCities() {
+            // Get references to the country and city dropdowns
+            var countryDropdown = document.getElementById("country");
+            var cityDropdown = document.getElementById("city");
+            
+            // Clear existing city options
+            cityDropdown.innerHTML = "";
+            
+            // Get the selected country
+            var selectedCountry = countryDropdown.value;
+            
+            // Populate the city dropdown with options based on the selected country
+            if (selectedCountry && cityOptions[selectedCountry]) {
+                cityOptions[selectedCountry].forEach(function (city) {
+                    var option = document.createElement("option");
+                    option.text = city;
+                    cityDropdown.add(option);
+                });
+            } else {
+                // Add a default option when no country is selected
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "Select a City";
+                cityDropdown.add(defaultOption);
+            }
+        }
+    </script>
+
+    </form>
+
+</body>
+</html>

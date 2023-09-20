@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        .redirect-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            text-decoration: none; /* Remove underline from the button */
+        }
+
+        .redirect-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Redirect Page</h1>
+    <div class="button-container">
+        <!-- Using a form to perform the redirection -->
+        <form action="{% url 'details' %}"> <!-- Replace with the actual URL of the next page -->
+            <input type="submit"  value="Go to Next Page">
+        </form>
+    </div>
+</body>
+</html>

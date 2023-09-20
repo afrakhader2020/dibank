@@ -1,0 +1,13 @@
+<label for="district">Select a District:</label>
+    <select id="district" onchange="redirectToWikipedia()">
+        <option value="new-york">New York</option>
+        <option value="los-angeles">Los Angeles</option>
+        <!-- Add more options for other districts -->
+    </select>
+
+    <script>
+        function redirectToWikipedia() {
+            var selectedDistrict = document.getElementById("district").value;
+            window.location.href = "https://en.wikipedia.org/wiki/Kannur" + selectedDistrict;
+        }
+    </script>
